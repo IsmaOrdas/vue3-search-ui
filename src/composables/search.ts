@@ -1,9 +1,11 @@
-export function useSearch(fetcher) {
+import { ref } from "vue";
+
+export function useSearch(fetcher: Function) {
   const searchInput = ref("");
   const results = ref({});
   const status = ref(null);
   const loading = ref(false);
-  const error = ref(null);
+  const error = ref();
   const showResults = ref(false);
 
   const clearInput = () => {
@@ -15,7 +17,7 @@ export function useSearch(fetcher) {
     showResults.value = !showResults.value;
   }
 
-  const callFetch = async (...params) => {
+  const callFetch = async (...params: any) => {
     loading.value = true;
     results.value = {};
     error.value = null;
@@ -25,7 +27,7 @@ export function useSearch(fetcher) {
       results.value = response.data ? response.data : [];
       status.value = response.status;
 
-    } catch (err) {
+    } catch (err: unknown) {
       error.value = err;
     }
     loading.value = false;
