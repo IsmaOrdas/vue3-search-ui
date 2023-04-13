@@ -15,9 +15,18 @@
           @keyup="triggerSearch"
         />
       </label>
-      <button @click="clearInput" class="search-box__clear" v-if="searchInput.length">Clear</button>
+      <button 
+        @click="clearInput" 
+        class="search-box__clear" 
+        v-if="searchInput.length"
+      >
+        Clear
+      </button>
     </form>
-    <search-results :results="results" :open="showResults"></search-results>
+    <search-results 
+      :results="results" 
+      :open="showResults"
+    />
   </div>
 </template>
 
@@ -33,11 +42,15 @@ onClickOutside(searchBox, () => toggleShowResults());
 
 const triggerSearch = useDebounceFn(async () => {
   await callFetch(searchInput.value);
+
+  if (showResults.value) {
+    return;
+  }
   
   if (!loading.value && results.value !== null) {
     toggleShowResults();
   }
-}, 400)
+}, 400);
 </script>
 
 <style lang="scss" scoped>

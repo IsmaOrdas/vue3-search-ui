@@ -3,7 +3,6 @@ import { ref } from "vue";
 export function useSearch(fetcher: Function) {
   const searchInput = ref("");
   const results = ref({});
-  const status = ref(null);
   const loading = ref(false);
   const error = ref();
   const showResults = ref(false);
@@ -25,13 +24,13 @@ export function useSearch(fetcher: Function) {
     try {
       const response = await fetcher(...params);
       results.value = response.data ? response.data : [];
-      status.value = response.status;
 
     } catch (err: unknown) {
       error.value = err;
     }
+
     loading.value = false;
   };
 
-  return { searchInput, showResults, results, loading, error, status, callFetch, toggleShowResults, clearInput };
+  return { searchInput, showResults, results, loading, error, callFetch, toggleShowResults, clearInput };
 }

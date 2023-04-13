@@ -11,7 +11,7 @@ export function getToken() {
     {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Basic MmJiM2M3MjI4MGUzNGEyZGE2MWI0N2M1Y2M4N2MxOWY6YmIyNDk3MWJmNmM5NDc1YWI2MjFjZTE2ODQzZDNjYmM='
+        Authorization: `Basic ${import.meta.env.VITE_APP_AUTH}`
       }
     }
   ).then((res) => {
